@@ -11,7 +11,7 @@ import os
 import random
 from PIL import Image,ImageTk
 #  CONSTANTS
-SCREEN_WIDTH = 1430
+SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 800
 
 root = tk.Tk()
@@ -45,12 +45,17 @@ bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','Backgroud5.png'))
 bgA=tk.PhotoImage(file=os.path.join('imags','buttonA.png'))
 bg4=tk.PhotoImage(file=os.path.join('imags','bg-menu.png'))
-# wall=tk.PhotoImage(file=os.path.join('imags','wall.png'))
+# __________________bg-top_________________
+bgtop1=tk.PhotoImage(file=os.path.join('imags','bg-top.png'))
+bgtop2=tk.PhotoImage(file=os.path.join('imags','bg-top.png'))
+bgtop3=tk.PhotoImage(file=os.path.join('imags','bg-top.png'))
+
 BTN=tk.PhotoImage(file=os.path.join('imags','btn-removebg-preview.png'))
 
 # hero=tk.PhotoImage(file=os.path.join('imags','monster.png'))
-bg6=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
-bg8=tk.PhotoImage(file=os.path.join('imags','Bghelp.png'))
+bg6=tk.PhotoImage(file=os.path.join('imags','bg5.png'))
+bg8=tk.PhotoImage(file=os.path.join('imags','bg4.png'))
+MK=tk.PhotoImage(file=os.path.join('imags','monkey-big.png'))
 boom_imgae=tk.PhotoImage(file=os.path.join('imags','boom.png'))
 apple=tk.PhotoImage(file=os.path.join('imags','apples.png'))
 cherry=tk.PhotoImage(file=os.path.join('imags','cherry.png'))
@@ -173,12 +178,13 @@ def helpGame(event):
 
     canvas.delete('all')
 
-    canvas.create_image(600,320,image=bg8)
+    canvas.create_image(680,320,image=bg8)
+    canvas.create_image(300,320,image=MK)
 
-    canvas.create_image(100,50,image=back)
-    canvas.create_text(100,50,text="Back", font='212BabyGirl 15 bold', fill='black', tags='back')
+    canvas.create_image(150,40,image=back)
+    canvas.create_text(150,40,text="Back", font='212BabyGirl 15 bold', fill='black', tags='back')
 
-    canvas.create_image(650,320,image=Help)
+    canvas.create_image(935,350,image=Help)
 
 canvas.tag_bind('help','<Button-1>',helpGame)
 
@@ -253,19 +259,22 @@ def arrayToDrawing():
     canvas.create_image(680,340,image=bg6)
     canvas.create_image(1050,300,image=Monkey)
 
-    canvas.create_image(150,50,image=back)
-    canvas.create_text(150,50,text="Back", font='212BabyGirl 15 bold', fill='black', tags='bac')
+    canvas.create_image(100,40,image=back)
+    canvas.create_text(100,40,text="Back", font='212BabyGirl 15 bold', fill='black', tags='bac')
 
-    canvas.create_image(300,50,image=fruits)
-    canvas.create_text(400,50,text="Score : ",font='212BabyGirl 30 bold' ,fill="white")
-    item=canvas.create_text(500,50,text=score,font='212BabyGirl 30 bold',fill='white')
+    canvas.create_image(400,50,image=bgtop1)
+    canvas.create_image(325,50,image=fruits)
+    canvas.create_text(410,50,text="Score : ",font='212BabyGirl 20 bold' ,fill="white")
+    item=canvas.create_text(470,50,text=score,font='212BabyGirl 20 bold',fill='white')
 
-    canvas.create_image(660,50,image=heart)
-    canvas.create_text(750,50,text="Heart :",font='212BabyGirl 30 bold' ,fill="white")
-    item1=canvas.create_text(850,50,text=life,font='212BabyGirl 30 bold' ,fill="white")
+    canvas.create_image(750,50,image=bgtop2)
+    canvas.create_image(680,50,image=heart)
+    canvas.create_text(750,50,text="Heart :",font='212BabyGirl 20 bold' ,fill="white")
+    item1=canvas.create_text(820,50,text=life,font='212BabyGirl 20 bold' ,fill="white")
 
-    canvas.create_image(990,50,image=clock)
-    timer = canvas.create_text(1115,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 30 bold')
+    canvas.create_image(1115,50,image=bgtop3)
+    canvas.create_image(1035,50,image=clock)
+    timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
     
 
     
@@ -468,8 +477,8 @@ def clickLevel():
 
     canvas.create_image(400,350,image=BTN)
 
-    canvas.create_image(150,50,image=back)
-    canvas.create_text(150,50,text="Back", font='212BabyGirl 15 bold', fill='black', tags='bak')
+    canvas.create_image(150,40,image=back)
+    canvas.create_text(150,39,text="Back", font='212BabyGirl 15 bold', fill='black', tags='bak')
 
     canvas.create_text(400, 200, text="Easy",tags="level1", fill='gold', font=('212BabyGirl', 25 ,'bold'))
     canvas.tag_bind("level1","<Button-1>",levelEasy) 
@@ -485,6 +494,9 @@ def bakClick(event):
     canvas.delete('all')
     interface()
 canvas.tag_bind('bak','<Button-1>',bakClick)
+
+
+
 
 #____________key control__________
 root.bind("<Left>",moveLeft)
