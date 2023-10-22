@@ -30,7 +30,7 @@ FRUIT = 6
 FAST_FOOD = 2
 WALL = 4
 BOOM = 9
-# DOOR = 7
+DOOR = 7
 MARIO = 1
 
 #______________Images _________________________
@@ -39,7 +39,7 @@ MARIO = 1
 mario_left=tk.PhotoImage(file=os.path.join('imags','hero.png'))
 door_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
-Fire=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
+boom_image=tk.PhotoImage(file=os.path.join('imags','boom.png'))
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
@@ -80,8 +80,8 @@ back=tk.PhotoImage(file=os.path.join('imags','back.png'))
 
 
 
-fruit=[banana1,banana2,banana3,banana4,banana5,]
-fruits=[banana6,banana7 ,banana8]
+# fruit=[banana1,banana2,banana3,banana4,banana5,]
+# fruits=[banana6,banana7 ,banana8]
 
 #_____________Grid for level 1___________________
 def levelEasy(event):
@@ -93,21 +93,21 @@ def levelEasy(event):
 
     grid=canvas.create_image(230,320,image=MK)
 
-    grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-            [0,0,0,0,9,0,0,0,0,0,4,0,0,0,0,0,4,0,4,0,0,0,0,0,0],
-            [0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0],
-            [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+    # grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    #         [0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,4,0,4,0,0,0,0,0,0],
+    #         [0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    #         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
     arrayToDrawing()
     settime()
 
@@ -272,32 +272,32 @@ def backClick(event):
 canvas.tag_bind('back','<Button-1>',backClick)
 
 #_____________________Find Door_______________________________________________________________
-def countDoor(theDoor):
-    global door, score
-    door = theDoor
-    if door>=1 and score >= 20:
-        winsound.PlaySound("sound\\win.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
-        win()
-    if door>=1 and score< 20:
-        winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
-        Lost()
+# def countDoor(theDoor):
+#     global door, score
+#     door = theDoor
+#     if door>=1 and score >= 20:
+#         winsound.PlaySound("sound\\win.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+#         win()
+#     if door>=1 and score< 20:
+#         winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+#         Lost()
 
 # ___________sum score____________
-def countScore(newScore):
-    global score
-    score = newScore
-    canvas.itemconfig(item,text=score)
+# def countScore(newScore):
+#     global score
+#     score = newScore
+#     canvas.itemconfig(item,text=score)
 
-# _________ minus life______________
-def numberOfLife(mylife):
-    global life
-    life = mylife
-    if life <= 0:
-        winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
-        Lost()
-    canvas.itemconfig(item1,text=life)
-myfruit=random.choices(fruit)
-fastfood=random.choices(fruits)
+#_________ minus life______________
+# def numberOfLife(mylife):
+#     global life
+#     life = mylife
+#     if life <= 0:
+#         winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+#         Lost()
+#     canvas.itemconfig(item1,text=life)
+# myfruit=random.choices(fruit)
+# fastfood=random.choices(fruits)
 
 #_____________Funnnction for drawLevel______________
 def arrayToDrawing():
@@ -325,43 +325,43 @@ def arrayToDrawing():
     
 
     
-    for ro in range(len(grid)):
-        for co in range (len(grid[ro])):
+    # for ro in range(len(grid)):
+    #     for co in range (len(grid[ro])):
 
-            myfruit=random.choices(fruit)
-            fastfood=random.choices(fruits)
+    #         myfruit=random.choices(fruit)
+    #         fastfood=random.choices(fruits)
 
-            x1=27+(30*co)
-            x2=130+(30*co)
-            y1=150+(30*ro)
-            y2=180+(30*ro)
+    #         x1=27+(30*co)
+    #         x2=130+(30*co)
+    #         y1=150+(30*ro)
+    #         y2=180+(30*ro)
             
-            if grid[ro][co]== bgGrid:
-                canvas.create_rectangle(x1,y1,x2,y2, fill="", outline='') 
+    #         if grid[ro][co]== bgGrid:
+    #             canvas.create_rectangle(x1,y1,x2,y2, fill="", outline='') 
 
-            elif grid[ro][co]== FRUIT:
-                canvas.create_image(x1,y1,image=myfruit, anchor="nw")
+    #         elif grid[ro][co]== FRUIT:
+    #             canvas.create_image(x1,y1,image=myfruit, anchor="nw")
 
-            elif grid[ro][co]== FAST_FOOD: 
-                canvas.create_image(x1,y1,image=fastfood, anchor="nw")
+    #         elif grid[ro][co]== FAST_FOOD: 
+    #             canvas.create_image(x1,y1,image=fastfood, anchor="nw")
 
-            elif grid[ro][co]== WALL:               
-                canvas.create_image(x1,y1,image=wall_image, anchor="nw")
+    #         elif grid[ro][co]== WALL:               
+    #             canvas.create_image(x1,y1,image=wall_image, anchor="nw")
 
-            elif grid[ro][co]== BOOM:                
-                canvas.create_image(x1,y1,image=Fire, anchor="nw")
-            elif grid[ro][co]== BOOM:                
-                canvas.create_image(x1,y1,image=Fire, anchor="nw")
+    #         elif grid[ro][co]== BOOM:                
+    #             canvas.create_image(x1,y1,image=boom_image, anchor="nw")
+    #         elif grid[ro][co]== BOOM:                
+    #             canvas.create_image(x1,y1,image=boom_image, anchor="nw")
                 
-            # elif grid[ro][co]== DOOR:    
-            #     canvas.create_image(x1,y1,image=door_imag, anchor="nw")
+    #         elif grid[ro][co]== DOOR:    
+    #             canvas.create_image(x1,y1,image=door_imag, anchor="nw")
 
-            elif grid[ro][co]== MARIO:               
-                canvas.create_image(x1,y1,image=mario_left, anchor="nw")
+    #         elif grid[ro][co]== MARIO:               
+    #             canvas.create_image(x1,y1,image=mario_left, anchor="nw")
                 
-        canvas.create_rectangle(x1,y1,x2,y2, outline='')
+    #     canvas.create_rectangle(x1,y1,x2,y2, outline='')
 
-    return None
+    # return None
 
 
 # __________Function for return row and col__________________
@@ -379,20 +379,20 @@ def moveCharactor(direction):
     col = position[1]
     if direction == "left":
         if col != bgGrid:
-            if grid[row][col-1] == FRUIT:
-                countScore(score + 1)
-                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row][col-1] == FRUIT:
+            #     countScore(score + 1)
+            #     winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-            if grid[row][col-1] == FAST_FOOD:
-                countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
+            # if grid[row][col-1] == FAST_FOOD:
+            #     countScore(score - 1)
+            #     winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
 
             # if grid[row][col-1] == DOOR:
             #     countDoor(door + 1)
 
-            if grid[row][col-1] == BOOM:
-                numberOfLife(life - 1)
-                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row][col-1] == BOOM:
+            #     numberOfLife(life - 1)
+            #     winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
             if grid[row][col-1] != WALL:
                 grid[row][col]=0
@@ -400,17 +400,17 @@ def moveCharactor(direction):
 #____________________________________________move Right______________________________________________
     if direction == "right" and "jump":
         if col != len(grid[0])-1:
-            if grid[row][col+1] == FRUIT:
-                countScore(score + 1)
-                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row][col+1] == FRUIT:
+            #     countScore(score + 1)
+            #     winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-            if grid[row][col+1] == FAST_FOOD:
-                countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+            # if grid[row][col+1] == FAST_FOOD:
+            #     countScore(score - 1)
+            #     winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
-            if grid[row][col+1] == BOOM:
-                numberOfLife(life - 1)
-                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row][col+1] == BOOM:
+            #     numberOfLife(life - 1)
+            #     winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
             
             # if grid[row][col+1] == DOOR:
@@ -424,21 +424,21 @@ def moveCharactor(direction):
 #________move Up_____________
     if direction == "up":
         if row != 0:
-            if grid[row-1][col] == FRUIT:
-                countScore(score + 1)
-                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row-1][col] == FRUIT:
+            #     countScore(score + 1)
+            #     winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-            if grid[row-1][col] == FAST_FOOD:
-                countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+            # if grid[row-1][col] == FAST_FOOD:
+            #     countScore(score - 1)
+            #     winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
             
             # if grid[row-1][col] == DOOR:
             #     countDoor(door + 1)   
 
-            if grid[row-1][col] == BOOM:
-                numberOfLife(life - 1)
-                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row-1][col] == BOOM:
+            #     numberOfLife(life - 1)
+            #     winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
             
             if grid[row-1][col] != WALL:
@@ -448,22 +448,22 @@ def moveCharactor(direction):
 # _______________move Down______________
     if direction == "down":
         if row != len(grid[0])-1:
-            if grid[row+1][col] == FRUIT:
-                countScore(score + 1)
-                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row+1][col] == FRUIT:
+            #     countScore(score + 1)
+            #     winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
             
-            if grid[row+1][col] == FAST_FOOD:
-                countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+            # if grid[row+1][col] == FAST_FOOD:
+            #     countScore(score - 1)
+            #     winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
             
             # if grid[row+1][col] == DOOR:
             #     countDoor(door + 1)
 
-            if grid[row+1][col] == BOOM:
-                numberOfLife(life - 1)
-                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+            # if grid[row+1][col] == BOOM:
+            #     numberOfLife(life - 1)
+            #     winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
             
             if grid[row+1][col] != WALL:
