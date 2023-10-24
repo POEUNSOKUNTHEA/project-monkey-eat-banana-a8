@@ -29,14 +29,17 @@ bgGrid = 0
 #______________Images _________________________
 
 
-
 hero_mk=tk.PhotoImage(file=os.path.join('imags','hero.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
+wall2_image=tk.PhotoImage(file=os.path.join('imags','walld2.png'))
+snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
+thorns_image=tk.PhotoImage(file=os.path.join('imags','thorns.png'))
 BN_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
+rock_imag=tk.PhotoImage(file=os.path.join('imags','rock.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
 win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
 fire_image=tk.PhotoImage(file=os.path.join('imags','fire.png'))
-snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
+enemy_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
@@ -258,6 +261,52 @@ def levelMedium(event):
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
 
+     # ________________start-hero-level2__________________
+
+    canvas.create_image(70,495,image=hero_mk)
+    canvas.create_image(103,550,image=wall_image)
+
+    canvas.create_image(190,250,image=wall_image)
+    canvas.create_image(160,220,image=BN_imag)
+    canvas.create_image(200,220,image=BN_imag)
+
+    canvas.create_image(300,450,image=wall_image)
+    canvas.create_image(360,445,image=thorns_image)
+    canvas.create_image(275,420,image=BN_imag)
+    canvas.create_image(320,420,image=BN_imag)
+
+    canvas.create_image(500,350,image=wall_image)
+    canvas.create_image(475,320,image=BN_imag)
+    canvas.create_image(420,530,image=snack_image)
+    canvas.create_image(520,320,image=BN_imag)
+
+    canvas.create_image(700,470,image=wall_image)
+    canvas.create_image(720,570,image=snack_image)
+    canvas.create_image(675,435,image=BN_imag)
+    canvas.create_image(720,435,image=BN_imag)
+
+
+    canvas.create_image(750,250,image=wall2_image)
+    canvas.create_image(725,220,image=BN_imag)
+    canvas.create_image(770,220,image=BN_imag)
+
+    canvas.create_image(1000,220,image=wall_image)
+    canvas.create_image(1060,220,image=thorns_image)
+    canvas.create_image(975,190,image=BN_imag)
+    canvas.create_image(1020,190,image=BN_imag)
+
+    canvas.create_image(1000,420,image=wall_image)
+    canvas.create_image(975,380,image=BN_imag)
+    canvas.create_image(1020,380,image=BN_imag)
+
+    canvas.create_image(1250,600,image=wall_image)
+    canvas.create_image(1290,600,image=thorns_image)
+    canvas.create_image(1220,570,image=BN_imag)
+    canvas.create_image(1280,570,image=BN_imag)
+
+    canvas.create_image(1253,210,image=wall_image)
+    canvas.create_image(1210,180,image=BN_imag)
+    canvas.create_image(1290,170,image=win_flag)
 
     settime()
 
@@ -287,8 +336,58 @@ def levelHard(event):
     canvas.create_image(1115,50,image=bgtop3)
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
-
+    level3()
     settime()
+def level3():
+    
+    # ________________start-hero-level3__________________
+
+    canvas.create_image(70,495,image=hero_mk)
+
+    canvas.create_image(103,550,image=wall_image)
+    canvas.create_image(450,550,image=wall_image)
+    canvas.create_image(500,520,image=fire_image)
+    canvas.create_image(400,520,image=banana1)
+    canvas.create_image(450,520,image=banana1)
+    canvas.create_image(650,520,image=banana1)
+    canvas.create_image(700,520,image=banana1)
+
+    canvas.create_image(300,450,image=wall_image)
+    canvas.create_image(240,420,image=banana1)
+    canvas.create_image(290,420,image=banana1)
+    canvas.create_image(440,320,image=banana1)
+    canvas.create_image(490,320,image=banana1)
+    canvas.create_image(540,320,image=banana1)
+    canvas.create_image(700,215,image=banana1)
+    canvas.create_image(750,215,image=banana1)
+    canvas.create_image(350,415,image=fire_image)
+    canvas.create_image(800,215,image=fire_image)
+
+
+    canvas.create_image(500,350,image=wall_image)
+
+    canvas.create_image(700,550,image=wall_image)
+
+    canvas.create_image(750,250,image=wall_image)
+    canvas.create_image(750,520,image=fire_image)
+    
+
+    # canvas.create_image(1250,600,image=wall_image)
+    canvas.create_image(900,450,image=wall_image)
+    canvas.create_image(950,415,image=banana1)
+    canvas.create_image(899,415,image=fire_image)
+    canvas.create_image(850,420,image=banana1)
+    
+
+    # canvas.create_image(1000,180,image=rock_imag)
+    canvas.create_image(1070,370,image=wall_image)
+    canvas.create_image(1030,340,image=banana1)
+    canvas.create_image(1110,340,image=fire_image)
+
+    canvas.create_image(1253,270,image=wall_image)
+    canvas.create_image(1290,220,image=win_flag)
+
+
 
 #______________ back click_______________________________________________________________________________________________________
 def bacClick(event):
@@ -374,4 +473,7 @@ canvas.tag_bind('ne','<Button-1>',nextLevel)
 # _________________________________________________________________________________________________________
 
 canvas.pack(expand=True, fill='both')
+
+
+
 root.mainloop()
