@@ -1,15 +1,15 @@
-from ast import Delete
-from asyncio import events
+# from ast import Delete
+# from asyncio import events
 # from cgitb import text
 # from ctypes.wintypes import tagSIZE
-from email.mime import image
+# from email.mime import image
 import tkinter as tk
-from tkinter import Tk, Canvas
+# from tkinter import Tk, Canvas
 # from typing import Counter 
 import winsound
 import os
-import random
-from PIL import Image,ImageTk
+# import random
+# from PIL import Image,ImageTk
 #  CONSTANTS
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 800
@@ -174,8 +174,7 @@ def levelEasy(event):
     canvas.delete('all')
     canvas.create_image(680,340,image=bg6)
     winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
-
-  
+    
 
     canvas.create_image(100,40,image=back)
     canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
@@ -233,75 +232,7 @@ def level1():
     canvas.create_image(1210,180,image=BN_imag)
     canvas.create_image(1290,170,image=win_flag)
 
-keyPressed = []
-SPEED = 7
-TIME = 10
-GRAVITY_FORCE = 9
 
-def check_movement(dx=0, dy=0):
-    global new_x1,new_x2
-    global new_y1,new_y2
-    ball_coords = canvas.coords(hero_mk)  # Use the hero_mk ID here
-
-    new_x1 = ball_coords[0] + dx
-    new_y1 = ball_coords[1] + dy
-    new_x2 = ball_coords[2] + dx
-    new_y2 = ball_coords[3] + dy
-
-    overlapping_objects = canvas.find_overlapping( new_x1, new_y1, new_x2, new_y2)
-
-    for wall_id in canvas.find_withtag("wall"):
-        if wall_id in overlapping_objects:
-            return False
-
-    return True
-# print (True)
-
-def start_move(event):
-    global keyPressed
-    if event.keysym not in keyPressed:
-        keyPressed.append(event.keysym)
-        if len(keyPressed) == 1:
-            move()
-
-def move():
-    if keyPressed:
-        x = 0
-        if "Left" in keyPressed:
-            x = -SPEED
-        if "Right" in keyPressed:
-            x = SPEED
-        if check_movement(x, 0):
-            canvas.move(hero_mk, x, 0)
-        if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE):
-            jump(30)
-
-def jump(force):
-    if force > 0:
-        if check_movement(0, -force):
-            canvas.move(hero_mk, 0, -force)
-            root.after(TIME, jump, force - 1)
-
-def stop_move(event):
-    global keyPressed
-    if event.keysym in keyPressed:
-        keyPressed.remove(event.keysym)
-
-def gravity():
-    if check_movement(0, GRAVITY_FORCE):
-        canvas.move(hero_mk, 0, GRAVITY_FORCE)
-    root.after(TIME, gravity)
-
-# Call the level1 function to create the level
-# level1()
-
-root.bind("<Key>", start_move)
-root.bind("<KeyRelease>", stop_move)
-
-# Start the gravity and event loop
-# gravity()
-
-   
 #_____________Funnnction for drawLevel______________
 def levelMedium(event):
     global item,item1,score,life,timer
@@ -309,7 +240,6 @@ def levelMedium(event):
     canvas.create_image(680,340,image=bg6)
     winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    
 
     canvas.create_image(100,40,image=back)
     canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
@@ -339,7 +269,7 @@ def levelHard(event):
     canvas.create_image(680,340,image=bg6)
     winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-  
+
 
     canvas.create_image(100,40,image=back)
     canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
@@ -408,20 +338,20 @@ def Lost():
 
     canvas.create_text(900,450,text='Menu',font=('BLOODY TYPE PERSONAL USE', 30 ,'bold'),fill='black',tags='ne')
 
-    Lost()
+    # Lost()
 
 # ___________________settime_________________
-time = 50
+time = 10
 def settime():
     global time
     canvas.itemconfig(timer,text='Timer : ' + str(time)+ "s")
 
-    if time <= 50:
+    if time <= 10:
         time -= 1
 
     if time <= 0:
         Lost()
-
+        time=10
     canvas.after(1500,settime)
 
 
