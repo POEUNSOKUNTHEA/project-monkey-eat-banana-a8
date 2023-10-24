@@ -1,11 +1,11 @@
 from ast import Delete
 from asyncio import events
-from cgitb import text
-from ctypes.wintypes import tagSIZE
+# from cgitb import text
+# from ctypes.wintypes import tagSIZE
 from email.mime import image
 import tkinter as tk
-from tkinter import Canvas, font
-from typing import Counter 
+from tkinter import Tk, Canvas
+# from typing import Counter 
 import winsound
 import os
 import random
@@ -36,6 +36,7 @@ BN_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
 win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
 fire_image=tk.PhotoImage(file=os.path.join('imags','fire.png'))
+snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
@@ -191,24 +192,114 @@ def levelEasy(event):
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
 
+    level1()
+    settime()
     # ________________start-hero-level1__________________
+def level1():
 
     canvas.create_image(70,495,image=hero_mk)
-    canvas.create_image(103,550,image=wall_image)
-    canvas.create_image(300,450,image=wall_image)
-    canvas.create_image(500,350,image=wall_image)
-    canvas.create_image(700,550,image=wall_image)
-    canvas.create_image(750,250,image=wall_image)
-    canvas.create_image(1000,370,image=wall_image)
-    canvas.create_image(1250,600,image=wall_image)
+    canvas.create_image(103,550,image=wall_image,tags="wall")
+    canvas.create_image(133,520,image=BN_imag)
 
-    canvas.create_image(1253,210,image=wall_image)
+
+    canvas.create_image(300,450,image=wall_image,tags="wall")
+    canvas.create_image(265,420,image=snack_image)
+    canvas.create_image(330,420,image=BN_imag)
+
+    canvas.create_image(500,350,image=wall_image,tags="wall")
+    canvas.create_image(465,320,image=BN_imag)
+    canvas.create_image(530,320,image=BN_imag)
+    
+
+    canvas.create_image(700,550,image=wall_image,tags="wall")
+    canvas.create_image(656,520,image=BN_imag)
+    canvas.create_image(730,520,image=snack_image)
+
+    canvas.create_image(750,250,image=wall_image,tags="wall")
+    canvas.create_image(715,220,image=BN_imag)
+    canvas.create_image(780,220,image=snack_image)
+
+    canvas.create_image(1000,370,image=wall_image,tags="wall")
+    canvas.create_image(965,340,image=BN_imag)
+    canvas.create_image(1030,340,image=BN_imag)
+
+    canvas.create_image(1250,600,image=wall_image,tags="wall")
+    canvas.create_image(1215,570,image=snack_image)
+    canvas.create_image(1280,570,image=BN_imag)
+
+    canvas.create_image(1253,210,image=wall_image,tags="wall")
     canvas.create_image(1210,180,image=BN_imag)
     canvas.create_image(1290,170,image=win_flag)
 
-   
+keyPressed = []
+SPEED = 7
+TIME = 10
+GRAVITY_FORCE = 9
 
-    settime()
+def check_movement(dx=0, dy=0):
+    global new_x1,new_x2
+    global new_y1,new_y2
+    ball_coords = canvas.coords(hero_mk)  # Use the hero_mk ID here
+
+    new_x1 = ball_coords[0] + dx
+    new_y1 = ball_coords[1] + dy
+    new_x2 = ball_coords[2] + dx
+    new_y2 = ball_coords[3] + dy
+
+    overlapping_objects = canvas.find_overlapping( new_x1, new_y1, new_x2, new_y2)
+
+    for wall_id in canvas.find_withtag("wall"):
+        if wall_id in overlapping_objects:
+            return False
+
+    return True
+# print (True)
+
+def start_move(event):
+    global keyPressed
+    if event.keysym not in keyPressed:
+        keyPressed.append(event.keysym)
+        if len(keyPressed) == 1:
+            move()
+
+def move():
+    if keyPressed:
+        x = 0
+        if "Left" in keyPressed:
+            x = -SPEED
+        if "Right" in keyPressed:
+            x = SPEED
+        if check_movement(x, 0):
+            canvas.move(hero_mk, x, 0)
+        if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE):
+            jump(30)
+
+def jump(force):
+    if force > 0:
+        if check_movement(0, -force):
+            canvas.move(hero_mk, 0, -force)
+            root.after(TIME, jump, force - 1)
+
+def stop_move(event):
+    global keyPressed
+    if event.keysym in keyPressed:
+        keyPressed.remove(event.keysym)
+
+def gravity():
+    if check_movement(0, GRAVITY_FORCE):
+        canvas.move(hero_mk, 0, GRAVITY_FORCE)
+    root.after(TIME, gravity)
+
+# Call the level1 function to create the level
+# level1()
+
+root.bind("<Key>", start_move)
+root.bind("<KeyRelease>", stop_move)
+
+# Start the gravity and event loop
+# gravity()
+
+   
 #_____________Funnnction for drawLevel______________
 def levelMedium(event):
     global item,item1,score,life,timer
@@ -260,11 +351,6 @@ def levelHard(event):
     canvas.create_image(1115,50,image=bgtop3)
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
-
-
-    
-
-
 
     settime()
 
@@ -332,8 +418,6 @@ def settime():
 
     canvas.after(1500,settime)
 
-
-# __
 
 
 # _____________functionn for next level_____________
