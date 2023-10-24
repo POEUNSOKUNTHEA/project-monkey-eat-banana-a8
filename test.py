@@ -29,13 +29,14 @@ bgGrid = 0
 #______________Images _________________________
 
 
-
 hero_mk=tk.PhotoImage(file=os.path.join('imags','hero.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
 BN_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
+rock_imag=tk.PhotoImage(file=os.path.join('imags','rock.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
 win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
 fire_image=tk.PhotoImage(file=os.path.join('imags','fire.png'))
+enemy_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
@@ -261,10 +262,35 @@ def levelHard(event):
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
 
+    # ________________start-hero-level3__________________
 
-    
+    canvas.create_image(70,495,image=hero_mk)
 
+    canvas.create_image(103,550,image=wall_image)
+    canvas.create_image(300,450,image=wall_image)
+    canvas.create_image(500,350,image=wall_image)
+    canvas.create_image(450,550,image=wall_image)
+    canvas.create_image(700,550,image=wall_image)
+    canvas.create_image(750,250,image=wall_image)
+    canvas.create_image(1070,370,image=wall_image)
+    # canvas.create_image(1250,600,image=wall_image)
+    canvas.create_image(900,450,image=wall_image)
+    canvas.create_image(1253,270,image=wall_image)
 
+    # canvas.create_image(1000,180,image=rock_imag)
+    canvas.create_image(1290,220,image=win_flag)
+
+    canvas.create_image(250,420,image=banana1)
+    canvas.create_image(400,520,image=banana1)
+    canvas.create_image(650,520,image=banana1)
+    canvas.create_image(850,420,image=banana1)
+    canvas.create_image(1010,340,image=banana1)
+
+    canvas.create_image(350,420,image=fire_image)
+    canvas.create_image(500,520,image=fire_image)
+    canvas.create_image(750,520,image=fire_image)
+    canvas.create_image(950,420,image=fire_image)
+    canvas.create_image(1120,340,image=enemy_image)
 
     settime()
 
@@ -354,4 +380,7 @@ canvas.tag_bind('ne','<Button-1>',nextLevel)
 # _________________________________________________________________________________________________________
 
 canvas.pack(expand=True, fill='both')
+
+
+
 root.mainloop()
