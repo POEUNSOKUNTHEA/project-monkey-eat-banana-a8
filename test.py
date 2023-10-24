@@ -33,6 +33,8 @@ bgGrid = 0
 hero_mk=tk.PhotoImage(file=os.path.join('imags','hero.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
 wall2_image=tk.PhotoImage(file=os.path.join('imags','walld2.png'))
+snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
+thorns_image=tk.PhotoImage(file=os.path.join('imags','thorns.png'))
 BN_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
 win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
@@ -340,11 +342,11 @@ def levelMedium(event):
 
     canvas.create_image(500,350,image=wall_image)
     canvas.create_image(475,320,image=BN_imag)
-    canvas.create_image(420,530,image=enemy_image)
+    canvas.create_image(420,530,image=snack_image)
     canvas.create_image(520,320,image=BN_imag)
 
     canvas.create_image(700,470,image=wall_image)
-    canvas.create_image(720,570,image=enemy_image)
+    canvas.create_image(720,570,image=snack_image)
     canvas.create_image(675,435,image=BN_imag)
     canvas.create_image(720,435,image=BN_imag)
 
