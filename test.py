@@ -173,6 +173,8 @@ def levelEasy(event):
     global item,item1,score,life,timer
     canvas.delete('all')
     canvas.create_image(680,340,image=bg6)
+    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+
   
 
     canvas.create_image(100,40,image=back)
@@ -305,7 +307,9 @@ def levelMedium(event):
     global item,item1,score,life,timer
     canvas.delete('all')
     canvas.create_image(680,340,image=bg6)
-  
+    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+
+    
 
     canvas.create_image(100,40,image=back)
     canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
@@ -333,6 +337,8 @@ def levelHard(event):
     global item,item1,score,life,timer
     canvas.delete('all')
     canvas.create_image(680,340,image=bg6)
+    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+
   
 
     canvas.create_image(100,40,image=back)
