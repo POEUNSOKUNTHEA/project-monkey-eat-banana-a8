@@ -406,9 +406,57 @@ def levelHard(event):
     canvas.create_image(1115,50,image=bgtop3)
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
-
+    level3()
     settime()
+def level3():
     
+    # ________________start-hero-level3__________________
+
+    canvas.create_image(70,495,image=hero_mk)
+
+    canvas.create_image(103,550,image=wall_image)
+    canvas.create_image(450,550,image=wall_image)
+    canvas.create_image(500,520,image=fire_image)
+    canvas.create_image(400,520,image=banana1)
+    canvas.create_image(450,520,image=banana1)
+    canvas.create_image(650,520,image=banana1)
+    canvas.create_image(700,520,image=banana1)
+
+    canvas.create_image(300,450,image=wall_image)
+    canvas.create_image(240,420,image=banana1)
+    canvas.create_image(290,420,image=banana1)
+    canvas.create_image(440,320,image=banana1)
+    canvas.create_image(490,320,image=banana1)
+    canvas.create_image(540,320,image=banana1)
+    canvas.create_image(700,215,image=banana1)
+    canvas.create_image(750,215,image=banana1)
+    canvas.create_image(350,415,image=fire_image)
+    canvas.create_image(800,215,image=fire_image)
+
+
+    canvas.create_image(500,350,image=wall_image)
+
+    canvas.create_image(700,550,image=wall_image)
+
+    canvas.create_image(750,250,image=wall_image)
+    canvas.create_image(750,520,image=fire_image)
+    
+
+    # canvas.create_image(1250,600,image=wall_image)
+    canvas.create_image(900,450,image=wall_image)
+    canvas.create_image(950,415,image=banana1)
+    canvas.create_image(899,415,image=fire_image)
+    canvas.create_image(850,420,image=banana1)
+    
+
+    # canvas.create_image(1000,180,image=rock_imag)
+    canvas.create_image(1070,370,image=wall_image)
+    canvas.create_image(1030,340,image=banana1)
+    canvas.create_image(1110,340,image=fire_image)
+
+    canvas.create_image(1253,270,image=wall_image)
+    canvas.create_image(1290,220,image=win_flag)
+
 
 
 #______________ back click_______________________________________________________________________________________________________
