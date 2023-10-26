@@ -13,7 +13,7 @@ canvas = tk.Canvas(root)
 
 # ________________Virable_________________
 score=0
-win=0
+wins=0
 isfound=False
 isWin=True
 life=3
@@ -31,14 +31,9 @@ MARIO = 1
 
 hero_mk=tk.PhotoImage(file=os.path.join('imags','monkey.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
-snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
-thorns_image=tk.PhotoImage(file=os.path.join('imags','thorns.png'))
 BN_imag=tk.PhotoImage(file=os.path.join('imags','banana6.png'))
-rock_imag=tk.PhotoImage(file=os.path.join('imags','rock.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
-win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
-enemy_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
-
+win_win=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
 
 
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
@@ -277,14 +272,14 @@ def backClick(event):
     interface()
 canvas.tag_bind('back','<Button-1>',backClick)
 
-#_____________________Find Door_______________________________________________________________
-def countDoor(thewin):
-    global win, score
-    win = thewin
-    if win>=1 and score >= 20:
+#_____________________Find win_______________________________________________________________
+def countwin(thewin):
+    global wins, score
+    wins = thewin
+    if wins>=1 and score >= 20:
         winsound.PlaySound("sound\\win.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
         win()
-    if win>=1 and score< 20:
+    if wins>=1 and score< 20:
         winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
         Lost()
 
@@ -362,7 +357,7 @@ def arrayToDrawing():
                 canvas.create_image(x1,y1,image=fire_image, anchor="nw")
                 
             elif grid[ro][co]== WINS:    
-                canvas.create_image(x1,y1,image=win_flag, anchor="nw")
+                canvas.create_image(x1,y1,image=win_win, anchor="nw")
 
             elif grid[ro][co]== MARIO:               
                 canvas.create_image(x1,y1,image=hero_mk, anchor="nw")
@@ -381,7 +376,7 @@ def positionNumOne(grid):
     return position
 # ________________move left________________
 def moveMonkey(direction):
-    global win
+    global wins
     position=positionNumOne(grid)
     row = position[0]
     col = position[1]
@@ -396,7 +391,7 @@ def moveMonkey(direction):
                 winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
 
             if grid[row][col-1] == WINS:
-                countDoor(win + 1)
+                countwin(wins + 1)
 
             if grid[row][col-1] == FIRE:
                 numberOfLife(life - 1)
@@ -422,7 +417,7 @@ def moveMonkey(direction):
 
             
             if grid[row][col+1] == WINS:
-                countDoor(win + 1)
+                countwin(wins + 1)
 
             print(win)
             if grid[row][col+1] !=WALL:
@@ -442,7 +437,7 @@ def moveMonkey(direction):
 
             
             if grid[row-1][col] == WIN:
-                countDoor(win + 1)   
+                countwin(wins + 1)   
 
             if grid[row-1][col] == FIRE:
                 numberOfLife(life - 1)
@@ -467,7 +462,7 @@ def moveMonkey(direction):
 
             
             if grid[row+1][col] == WINS:
-                countDoor(win + 1)
+                countwin(wins + 1)
 
             if grid[row+1][col] == FIRE:
                 numberOfLife(life - 1)
@@ -599,9 +594,9 @@ def Lost():
 # _____________functionn for next level_____________
 def nextLevel(event):
     canvas.delete('all')
-    global grid,score,life,win,isfound,isWin,time
+    global grid,score,life,wins,isfound,isWin,time
     score=0
-    win=0
+    wins=0
     isfound=False
     isWin=True
     time = 0
