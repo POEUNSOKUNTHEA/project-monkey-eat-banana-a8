@@ -33,8 +33,12 @@ hero_mk=tk.PhotoImage(file=os.path.join('imags','monkey.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
 BN_imag=tk.PhotoImage(file=os.path.join('imags','banana6.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
+<<<<<<< HEAD:Game.py
 win_win=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
 
+=======
+win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
+>>>>>>> 60aa9d7a1166bd41578f930a6d7c4029509d88f7:Gam.py
 
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
@@ -91,38 +95,7 @@ def level1(event):
     life=3
     time = 50
 
-    grid = [[0,0,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,0],
-            [0,4,4,4,4,4,4,6,9,6,4,4,4,4,4,4,0,0,6,4,4,4,4,4,4,0,6,6,4,4,4,4,4,4],
-            [0,4,0,6,0,6,0,6,0,0,6,0,6,0,0,6,0,2,0,0,6,0,6,0,0,6,9,0,0,6,0,6,9,4],
-            [4,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,4,4],
-            [4,0,0,6,0,6,0,2,6,6,0,0,6,0,6,0,2,0,6,0,6,6,0,6,0,0,2,0,0,6,0,6,0,4],
-            [4,9,2,0,4,4,6,0,0,4,4,4,4,4,4,0,6,0,9,4,4,4,4,4,4,6,0,0,4,4,0,9,0,4],
-            [4,0,0,6,4,4,4,4,4,4,6,0,0,0,4,4,4,4,4,4,0,6,2,0,4,4,4,4,4,4,6,0,6,4],
-            [4,4,6,0,4,6,0,0,6,0,0,9,6,0,6,0,0,6,0,0,6,0,0,0,6,0,0,0,0,4,0,0,4,4],
-            [0,4,0,9,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,4,9,6,4,0],
-            [4,4,6,0,4,0,4,9,0,6,0,2,0,9,0,0,4,0,6,0,9,4,0,2,0,0,9,4,0,4,6,0,4,4],
-            [4,6,0,6,4,6,0,0,0,9,0,6,0,0,6,0,0,2,0,6,0,6,6,0,0,7,0,9,0,4,0,0,6,4],
-            [4,0,9,0,4,0,4,6,0,6,0,4,0,6,0,6,0,0,0,9,0,4,0,0,9,0,9,4,0,4,6,2,0,4],
-            [4,6,0,2,4,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,6,6,4],
-            [4,4,0,0,4,0,6,0,9,0,6,0,4,4,9,0,2,6,0,6,0,6,0,2,0,0,6,0,4,4,6,9,0,4],
-            [0,4,1,6,4,4,4,0,6,0,0,2,0,0,6,0,0,0,6,9,0,4,4,0,6,9,0,6,0,6,0,0,4,4],
-            [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]
-           
-
- 
-
-    arrayToDrawing()
-    settime()
-
-
-#_____________Grid for level 2___________________
-def level2(event):
-
-    global grid,score, life, time
-    score=0
-    life=3
-    time = 50
-   
+       
     grid = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
             [4,0,0,0,4,6,4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,6,9,0,4],
             [4,6,9,6,0,0,0,6,2,6,0,0,0,6,2,6,0,0,0,0,9,6,0,6,4],
@@ -142,13 +115,17 @@ def level2(event):
     arrayToDrawing()
     settime()
 
-#_____________Grid for level 3___________________
-def level3(event):
+   
+    
 
-    global grid,score,life,time
+#_____________Grid for level 2___________________
+def level2(event):
+
+    global grid,score, life, time
     score=0
     life=3
     time = 50
+
     grid = [[4,4,4,4,5,5,5,5,4,4,4,4,4,7,4,4,4,4,4,5,5,5,5,4,4,4,4],
             [4,6,2,6,4,5,5,4,9,6,0,6,9,0,9,6,0,6,9,4,5,5,4,6,2,6,4],
             [4,2,6,2,0,4,4,0,6,0,9,0,6,0,6,0,9,0,6,0,4,4,0,2,0,2,4],
@@ -167,6 +144,35 @@ def level3(event):
             
     arrayToDrawing()
     settime()
+
+#_____________Grid for level 3___________________
+def level3(event):
+
+    global grid,score,life,time
+    score=0
+    life=3
+    time = 50
+  
+    grid = [[0,0,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,0],
+            [0,4,4,4,4,4,4,6,9,6,4,4,4,4,4,4,0,0,6,4,4,4,4,4,4,0,6,6,4,4,4,4,4,4],
+            [0,4,0,6,0,6,0,6,0,0,6,0,6,0,0,6,0,2,0,0,6,0,6,0,0,6,9,0,0,6,0,6,9,4],
+            [4,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,4,4],
+            [4,0,0,6,0,6,0,2,6,6,0,0,6,0,6,0,2,0,6,0,6,6,0,6,0,0,2,0,0,6,0,6,0,4],
+            [4,9,2,0,4,4,6,0,0,4,4,4,4,4,4,0,6,0,9,4,4,4,4,4,4,6,0,0,4,4,0,9,0,4],
+            [4,0,0,6,4,4,4,4,4,4,6,0,0,0,4,4,4,4,4,4,0,6,2,0,4,4,4,4,4,4,6,0,6,4],
+            [4,4,6,0,4,6,0,0,6,0,0,9,6,0,6,0,0,6,0,0,6,0,0,0,6,0,0,0,0,4,0,0,4,4],
+            [0,4,0,9,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,4,9,6,4,0],
+            [4,4,6,0,4,0,4,9,0,6,0,2,0,9,0,0,4,0,6,0,9,4,0,2,0,0,9,4,0,4,6,0,4,4],
+            [4,6,0,6,4,6,0,0,0,9,0,6,0,0,6,0,0,2,0,6,0,6,6,0,0,7,0,9,0,4,0,0,6,4],
+            [4,0,9,0,4,0,4,6,0,6,0,4,0,6,0,6,0,0,0,9,0,4,0,0,9,0,9,4,0,4,6,2,0,4],
+            [4,6,0,2,4,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,6,6,4],
+            [4,4,0,0,4,0,6,0,9,0,6,0,4,4,9,0,2,6,0,6,0,6,0,2,0,0,6,0,4,4,6,9,0,4],
+            [0,4,1,6,4,4,4,0,6,0,0,2,0,0,6,0,0,0,6,9,0,4,4,0,6,9,0,6,0,6,0,0,4,4],
+            [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]
+           
+    arrayToDrawing()
+    settime()
+
 
 
 
@@ -388,7 +394,7 @@ def moveMonkey(direction):
 
             if grid[row][col-1] == FAST_FOOD:
                 countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
+                winsound.PlaySound("sound\\boom.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
 
             if grid[row][col-1] == WINS:
                 countwin(wins + 1)
@@ -409,7 +415,7 @@ def moveMonkey(direction):
 
             if grid[row][col+1] == FAST_FOOD:
                 countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+                winsound.PlaySound("sound\\boom.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
             if grid[row][col+1] == FIRE:
                 numberOfLife(life - 1)
@@ -433,7 +439,7 @@ def moveMonkey(direction):
 
             if grid[row-1][col] == FAST_FOOD:
                 countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+                winsound.PlaySound("sound\\boom.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
             
             if grid[row-1][col] == WIN:
@@ -458,7 +464,7 @@ def moveMonkey(direction):
             
             if grid[row+1][col] == FAST_FOOD:
                 countScore(score - 1)
-                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
+                winsound.PlaySound("sound\\boom.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
             
             if grid[row+1][col] == WINS:
