@@ -1,7 +1,7 @@
-
 import tkinter as tk
 import winsound
 import os
+import random
 
 #  CONSTANTS
 SCREEN_WIDTH = 1400
@@ -13,26 +13,34 @@ canvas = tk.Canvas(root)
 
 # ________________Virable_________________
 score=0
-flag=0
+win=0
 isfound=False
 isWin=True
 life=3
 
+bgGrid = 0
+FRUIT = 6
+FAST_FOOD = 2
+WALL = 4
+FIRE = 9
+WINS = 7
+MARIO = 1
 
 #______________Images _________________________
 
 
-hero_mk=tk.PhotoImage(file=os.path.join('imags','hero.png'))
+hero_mk=tk.PhotoImage(file=os.path.join('imags','monkey.png'))
 wall_image=tk.PhotoImage(file=os.path.join('imags','walld1.png'))
-wall2_image=tk.PhotoImage(file=os.path.join('imags','walld2.png'))
 snack_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
 thorns_image=tk.PhotoImage(file=os.path.join('imags','thorns.png'))
-BN_imag=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
+BN_imag=tk.PhotoImage(file=os.path.join('imags','banana6.png'))
 rock_imag=tk.PhotoImage(file=os.path.join('imags','rock.png'))
 win_imag=tk.PhotoImage(file=os.path.join('imags','win.png'))
 win_flag=tk.PhotoImage(file=os.path.join('imags','win_flag.png'))
-fire_image=tk.PhotoImage(file=os.path.join('imags','fire.png'))
 enemy_image=tk.PhotoImage(file=os.path.join('imags','enemy.png'))
+
+
+
 Help=tk.PhotoImage(file=os.path.join('imags','Help.png'))
 bg3=tk.PhotoImage(file=os.path.join('imags','bg-start.png'))
 bg5=tk.PhotoImage(file=os.path.join('imags','bg2.png'))
@@ -56,15 +64,18 @@ bg8=tk.PhotoImage(file=os.path.join('imags','bg4.png'))
 MK=tk.PhotoImage(file=os.path.join('imags','monkey-big.png'))
 
 Child_MK=tk.PhotoImage(file=os.path.join('imags','MK_story.png'))
-banana1=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
-banana2=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
-banana3=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
-banana4=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
+fire_image=tk.PhotoImage(file=os.path.join('imags','fire.png'))
+booms=tk.PhotoImage(file=os.path.join('imags','boom.png'))
+banana1=tk.PhotoImage(file=os.path.join('imags','banana5.png'))
+banana2=tk.PhotoImage(file=os.path.join('imags','banana6.png'))
+banana3=tk.PhotoImage(file=os.path.join('imags','banana3.png'))
+banana4=tk.PhotoImage(file=os.path.join('imags','banana4.png'))
 
-banana5=tk.PhotoImage(file=os.path.join('imags','banana1.png'))
-banana6=tk.PhotoImage(file=os.path.join('imags','banana2.png'))
-banana7=tk.PhotoImage(file=os.path.join('imags','banana2.png'))
-banana8=tk.PhotoImage(file=os.path.join('imags','banana2.png'))
+banana5=tk.PhotoImage(file=os.path.join('imags','banana5.png'))
+banana6=tk.PhotoImage(file=os.path.join('imags','banana6.png'))
+boom1=tk.PhotoImage(file=os.path.join('imags','boom1.png'))
+boom3=tk.PhotoImage(file=os.path.join('imags','boom3.png'))
+boom4=tk.PhotoImage(file=os.path.join('imags','boom4.png'))
 Monkey=tk.PhotoImage(file=os.path.join('imags','monkey-mom.png'))
 clock=tk.PhotoImage(file=os.path.join('imags','clock.png'))
 heart=tk.PhotoImage(file=os.path.join('imags','heart.png'))
@@ -74,7 +85,94 @@ back=tk.PhotoImage(file=os.path.join('imags','back.png'))
 
 
 fruit=[banana1,banana2,banana3,banana4,banana5,]
-fruits=[banana6,banana7 ,banana8]
+fruits=[booms,boom1,boom3,boom4]
+
+
+#_____________Grid for level 1___________________
+def level1(event):
+
+    global grid, score, life, time 
+    score=0
+    life=3
+    time = 50
+
+    grid = [[0,0,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,4,0,0,0,0,0],
+            [0,4,4,4,4,4,4,6,9,6,4,4,4,4,4,4,0,0,6,4,4,4,4,4,4,0,6,6,4,4,4,4,4,4],
+            [0,4,0,6,0,6,0,6,0,0,6,0,6,0,0,6,0,2,0,0,6,0,6,0,0,6,9,0,0,6,0,6,9,4],
+            [4,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,4,4],
+            [4,0,0,6,0,6,0,2,6,6,0,0,6,0,6,0,2,0,6,0,6,6,0,6,0,0,2,0,0,6,0,6,0,4],
+            [4,9,2,0,4,4,6,0,0,4,4,4,4,4,4,0,6,0,9,4,4,4,4,4,4,6,0,0,4,4,0,9,0,4],
+            [4,0,0,6,4,4,4,4,4,4,6,0,0,0,4,4,4,4,4,4,0,6,2,0,4,4,4,4,4,4,6,0,6,4],
+            [4,4,6,0,4,6,0,0,6,0,0,9,6,0,6,0,0,6,0,0,6,0,0,0,6,0,0,0,0,4,0,0,4,4],
+            [0,4,0,9,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,4,9,6,4,0],
+            [4,4,6,0,4,0,4,9,0,6,0,2,0,9,0,0,4,0,6,0,9,4,0,2,0,0,9,4,0,4,6,0,4,4],
+            [4,6,0,6,4,6,0,0,0,9,0,6,0,0,6,0,0,2,0,6,0,6,6,0,0,7,0,9,0,4,0,0,6,4],
+            [4,0,9,0,4,0,4,6,0,6,0,4,0,6,0,6,0,0,0,9,0,4,0,0,9,0,9,4,0,4,6,2,0,4],
+            [4,6,0,2,4,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,6,6,4],
+            [4,4,0,0,4,0,6,0,9,0,6,0,4,4,9,0,2,6,0,6,0,6,0,2,0,0,6,0,4,4,6,9,0,4],
+            [0,4,1,6,4,4,4,0,6,0,0,2,0,0,6,0,0,0,6,9,0,4,4,0,6,9,0,6,0,6,0,0,4,4],
+            [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]
+           
+
+ 
+
+    arrayToDrawing()
+    settime()
+
+
+#_____________Grid for level 2___________________
+def level2(event):
+
+    global grid,score, life, time
+    score=0
+    life=3
+    time = 50
+   
+    grid = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,0,0,0,4,6,4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,6,9,0,4],
+            [4,6,9,6,0,0,0,6,2,6,0,0,0,6,2,6,0,0,0,0,9,6,0,6,4],
+            [4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,0,9,0,4],
+            [4,6,9,6,4,4,4,6,2,6,4,4,4,6,9,6,4,4,4,6,9,6,0,0,4],
+            [4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,9,0,0,7],
+            [4,0,4,4,4,0,4,4,4,4,4,0,4,4,4,4,4,0,4,4,4,4,4,4,4],
+            [4,0,6,0,4,0,4,0,6,0,4,0,4,0,6,0,4,0,4,0,6,0,4,6,4],
+            [4,6,9,6,0,0,0,6,2,6,0,0,0,6,2,6,0,0,0,6,9,6,0,0,4],
+            [4,0,6,0,4,0,4,0,6,0,4,0,4,0,6,0,4,0,4,0,6,0,4,0,4],
+            [4,4,4,4,4,0,4,4,4,4,4,0,4,4,4,4,4,0,4,4,4,4,4,0,4],
+            [4,0,9,0,4,6,4,0,6,0,4,6,4,0,6,0,4,6,4,0,6,0,6,0,4],
+            [4,6,6,6,4,4,4,6,9,6,4,4,4,6,9,6,4,4,4,6,2,6,9,6,4],
+            [4,0,9,0,0,6,0,0,9,0,0,6,0,0,9,0,0,6,0,0,6,0,9,0,4],
+            [4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]
+
+    arrayToDrawing()
+    settime()
+
+#_____________Grid for level 3___________________
+def level3(event):
+
+    global grid,score,life,time
+    score=0
+    life=3
+    time = 50
+    grid = [[4,4,4,4,5,5,5,5,4,4,4,4,4,7,4,4,4,4,4,5,5,5,5,4,4,4,4],
+            [4,6,2,6,4,5,5,4,9,6,0,6,9,0,9,6,0,6,9,4,5,5,4,6,2,6,4],
+            [4,2,6,2,0,4,4,0,6,0,9,0,6,0,6,0,9,0,6,0,4,4,0,2,0,2,4],
+            [5,4,0,0,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,4,4,6,0,6,4,5],
+            [5,5,4,9,0,9,0,0,0,9,0,2,0,4,0,2,0,9,0,0,0,9,0,9,4,5,5],
+            [5,5,5,4,6,0,0,2,9,6,9,0,0,4,0,0,9,6,9,0,2,0,6,4,5,5,5],
+            [5,5,5,4,0,9,6,4,0,6,0,4,0,0,0,4,0,6,0,4,0,9,0,4,5,5,5],
+            [5,5,5,4,6,4,0,6,0,9,0,2,0,4,0,2,0,9,0,0,0,4,6,4,5,5,5],
+            [5,5,5,4,0,2,4,9,0,6,9,4,4,4,4,4,9,0,0,9,4,2,0,4,5,5,5],
+            [5,5,5,4,6,9,6,4,0,0,0,0,0,1,0,4,0,0,0,4,6,9,6,4,5,5,5],
+            [5,5,5,4,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,0,0,0,0,4,5,5,5],
+            [5,5,5,5,4,6,9,2,6,0,0,4,6,0,6,4,0,0,6,2,9,6,4,5,5,5,5],
+            [5,5,5,5,5,4,9,0,2,9,0,0,9,2,9,0,4,9,2,0,9,4,5,5,5,5,5],
+            [5,5,5,5,5,5,4,6,9,4,6,0,9,2,9,0,6,4,9,6,4,5,5,5,5,5,5],
+            [5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5],]
+            
+    arrayToDrawing()
+    settime()
+
 
 
 # __________________Show interface___________________
@@ -101,6 +199,22 @@ def interface():
 
 
 interface()
+
+# =======================settime=======================
+
+time = 50
+def settime():
+    global time
+    canvas.itemconfig(timer,text='Timer : ' + str(time)+ "s")
+
+    if time <= 50:
+        time -= 1
+
+    if time <= 0:
+        Lost()
+        time=50
+    canvas.after(1500,settime)
+
 # __________________Show Help________________________
 def helpGame(event):
 
@@ -163,78 +277,41 @@ def backClick(event):
     interface()
 canvas.tag_bind('back','<Button-1>',backClick)
 
+#_____________________Find Door_______________________________________________________________
+def countDoor(thewin):
+    global win, score
+    win = thewin
+    if win>=1 and score >= 20:
+        winsound.PlaySound("sound\\win.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+        win()
+    if win>=1 and score< 20:
+        winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+        Lost()
 
-#_____________Funnnction for drawLevel______________
-def levelEasy(event):
-    global item,item1,score,life,timer
-    canvas.delete('all')
-    canvas.create_image(680,340,image=bg6)
-    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
-    
+# ___________sum score____________
+def countScore(newScore):
+    global score
+    score = newScore
+    canvas.itemconfig(item,text=score)
 
-    canvas.create_image(100,40,image=back)
-    canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
-
-    canvas.create_image(400,50,image=bgtop1)
-    canvas.create_image(325,50,image=Score_MK)
-    canvas.create_text(410,50,text="Score : ",font='212BabyGirl 20 bold' ,fill="white")
-    item=canvas.create_text(470,50,text=score,font='212BabyGirl 20 bold',fill='white')
-
-    canvas.create_image(750,50,image=bgtop2)
-    canvas.create_image(680,50,image=heart)
-    canvas.create_text(750,50,text="Heart :",font='212BabyGirl 20 bold' ,fill="white")
-    item1=canvas.create_text(820,50,text=life,font='212BabyGirl 20 bold' ,fill="white")
-
-    canvas.create_image(1115,50,image=bgtop3)
-    canvas.create_image(1035,50,image=clock)
-    timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
-
-    level1()
-    settime()
-    # ________________start-hero-level1__________________
-def level1():
-
-    canvas.create_image(70,495,image=hero_mk)
-    canvas.create_image(103,550,image=wall_image,tags="wall")
-    canvas.create_image(133,520,image=BN_imag)
-
-
-    canvas.create_image(300,450,image=wall_image,tags="wall")
-    canvas.create_image(265,420,image=snack_image)
-    canvas.create_image(330,420,image=BN_imag)
-
-    canvas.create_image(500,350,image=wall_image,tags="wall")
-    canvas.create_image(465,320,image=BN_imag)
-    canvas.create_image(530,320,image=BN_imag)
-    
-
-    canvas.create_image(700,550,image=wall_image,tags="wall")
-    canvas.create_image(656,520,image=BN_imag)
-    canvas.create_image(730,520,image=snack_image)
-
-    canvas.create_image(750,250,image=wall_image,tags="wall")
-    canvas.create_image(715,220,image=BN_imag)
-    canvas.create_image(780,220,image=snack_image)
-
-    canvas.create_image(1000,370,image=wall_image,tags="wall")
-    canvas.create_image(965,340,image=BN_imag)
-    canvas.create_image(1030,340,image=BN_imag)
-
-    canvas.create_image(1250,600,image=wall_image,tags="wall")
-    canvas.create_image(1215,570,image=snack_image)
-    canvas.create_image(1280,570,image=BN_imag)
-
-    canvas.create_image(1253,210,image=wall_image,tags="wall")
-    canvas.create_image(1210,180,image=BN_imag)
-    canvas.create_image(1290,170,image=win_flag)
+#_________ minus life______________
+def numberOfLife(mylife):
+    global life
+    life = mylife
+    if life <= 0:
+        winsound.PlaySound("sound\\gameover.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+        Lost()
+    canvas.itemconfig(item1,text=life)
+myfruit=random.choices(fruit)
+Boom=random.choices(fruits)
 
 
 #_____________Funnnction for drawLevel______________
-def levelMedium(event):
-    global item,item1,score,life,timer
+def arrayToDrawing():
+    global grid,item,item1,score,life,timer
     canvas.delete('all')
     canvas.create_image(680,340,image=bg6)
-    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+    # winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
 
     canvas.create_image(100,40,image=back)
@@ -254,134 +331,193 @@ def levelMedium(event):
     canvas.create_image(1035,50,image=clock)
     timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
 
-    level2()
-    settime()
-     # ________________start-hero-level2__________________
-
-def level2():
-
-    canvas.create_image(70,495,image=hero_mk)
-    canvas.create_image(103,550,image=wall_image)
-
-    canvas.create_image(190,250,image=wall_image)
-    canvas.create_image(160,220,image=BN_imag)
-    canvas.create_image(200,220,image=BN_imag)
-
-    canvas.create_image(300,450,image=wall_image)
-    canvas.create_image(360,445,image=thorns_image)
-    canvas.create_image(275,420,image=BN_imag)
-    canvas.create_image(320,420,image=BN_imag)
-
-    canvas.create_image(500,350,image=wall_image)
-    canvas.create_image(475,320,image=BN_imag)
-    canvas.create_image(420,530,image=snack_image)
-    canvas.create_image(520,320,image=BN_imag)
-
-    canvas.create_image(700,470,image=wall_image)
-    canvas.create_image(720,570,image=snack_image)
-    canvas.create_image(675,435,image=BN_imag)
-    canvas.create_image(720,435,image=BN_imag)
-
-
-    canvas.create_image(750,250,image=wall2_image)
-    canvas.create_image(725,220,image=BN_imag)
-    canvas.create_image(770,220,image=BN_imag)
-
-    canvas.create_image(1000,220,image=wall_image)
-    canvas.create_image(1060,220,image=thorns_image)
-    canvas.create_image(975,190,image=BN_imag)
-    canvas.create_image(1020,190,image=BN_imag)
-
-    canvas.create_image(1000,420,image=wall_image)
-    canvas.create_image(975,380,image=BN_imag)
-    canvas.create_image(1020,380,image=BN_imag)
-
-    canvas.create_image(1250,600,image=wall_image)
-    canvas.create_image(1290,600,image=thorns_image)
-    canvas.create_image(1220,570,image=BN_imag)
-    canvas.create_image(1280,570,image=BN_imag)
-
-    canvas.create_image(1253,210,image=wall_image)
-    canvas.create_image(1210,180,image=BN_imag)
-    canvas.create_image(1290,170,image=win_flag)
 
     
+    for ro in range(len(grid)):
+        for co in range (len(grid[ro])):
+
+            myfruit=random.choices(fruit)
+            Boom=random.choices(fruits)
+
+            x1=160+(30*co)
+            x2=150+(30*co)
+            y1=150+(30*ro)
+            y2=180+(30*ro)
+            
+            if grid[ro][co]== bgGrid:
+                canvas.create_rectangle(x1,y1,x2,y2, fill="", outline='') 
+
+            elif grid[ro][co]== FRUIT:
+                canvas.create_image(x1,y1,image=myfruit, anchor="nw")
+
+            elif grid[ro][co]== FAST_FOOD: 
+                canvas.create_image(x1,y1,image=Boom, anchor="nw")
+
+            elif grid[ro][co]== WALL:               
+                canvas.create_image(x1,y1,image=wall_image, anchor="nw")
+
+            elif grid[ro][co]== FIRE:                
+                canvas.create_image(x1,y1,image=fire_image, anchor="nw")
+            elif grid[ro][co]== FIRE:                
+                canvas.create_image(x1,y1,image=fire_image, anchor="nw")
+                
+            elif grid[ro][co]== WINS:    
+                canvas.create_image(x1,y1,image=win_flag, anchor="nw")
+
+            elif grid[ro][co]== MARIO:               
+                canvas.create_image(x1,y1,image=hero_mk, anchor="nw")
+                
+        canvas.create_rectangle(x1,y1,x2,y2, outline='')
+
+    return None
 
 
-#_____________Funnnction for drawLevel______________
-def levelHard(event):
-    global item,item1,score,life,timer
-    canvas.delete('all')
-    canvas.create_image(680,340,image=bg6)
-    winsound.PlaySound("sound\\monkey.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+# __________Function for return row and col__________________
+def positionNumOne(grid):  
+    for r in range(len(grid)):
+        for c in range(len(grid[r])):
+            if grid[r][c] == MARIO:
+                position=[r, c]
+    return position
+# ________________move left________________
+def moveMonkey(direction):
+    global win
+    position=positionNumOne(grid)
+    row = position[0]
+    col = position[1]
+    if direction == "left":
+        if col != bgGrid:
+            if grid[row][col-1] == FRUIT:
+                countScore(score + 1)
+                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    canvas.create_image(100,40,image=back)
-    canvas.create_text(100,42,text="Back", font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bac')
+            if grid[row][col-1] == FAST_FOOD:
+                countScore(score - 1)
+                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)      
 
-    canvas.create_image(400,50,image=bgtop1)
-    canvas.create_image(325,50,image=Score_MK)
-    canvas.create_text(410,50,text="Score : ",font='212BabyGirl 20 bold' ,fill="white")
-    item=canvas.create_text(470,50,text=score,font='212BabyGirl 20 bold',fill='white')
+            if grid[row][col-1] == WINS:
+                countDoor(win + 1)
 
-    canvas.create_image(750,50,image=bgtop2)
-    canvas.create_image(680,50,image=heart)
-    canvas.create_text(750,50,text="Heart :",font='212BabyGirl 20 bold' ,fill="white")
-    item1=canvas.create_text(820,50,text=life,font='212BabyGirl 20 bold' ,fill="white")
+            if grid[row][col-1] == FIRE:
+                numberOfLife(life - 1)
+                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    canvas.create_image(1115,50,image=bgtop3)
-    canvas.create_image(1035,50,image=clock)
-    timer = canvas.create_text(1130,50,text='Timer : ' + str(time)+ "s",fill='white',font='212BabyGirl 20 bold')
+            if grid[row][col-1] != WALL:
+                grid[row][col]=0
+                grid[row][col-1] =1
+#____________________________________________move Right______________________________________________
+    if direction == "right":
+        if col != len(grid[0])-1:
+            if grid[row][col+1] == FRUIT:
+                countScore(score + 1)
+                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    level3()
-    settime()
+            if grid[row][col+1] == FAST_FOOD:
+                countScore(score - 1)
+                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
-    # ________________start-hero-level3__________________
-def level3():
-    
+            if grid[row][col+1] == FIRE:
+                numberOfLife(life - 1)
+                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    canvas.create_image(70,495,image=hero_mk)
+            
+            if grid[row][col+1] == WINS:
+                countDoor(win + 1)
 
-    canvas.create_image(103,550,image=wall_image)
-    canvas.create_image(450,550,image=wall_image)
-    canvas.create_image(500,520,image=fire_image)
-    canvas.create_image(400,520,image=banana1)
-    canvas.create_image(450,520,image=banana1)
-    canvas.create_image(650,520,image=banana1)
-    canvas.create_image(700,520,image=banana1)
+            print(win)
+            if grid[row][col+1] !=WALL:
+                grid[row][col]=0
+                grid[row][col+1] =1
 
-    canvas.create_image(300,450,image=wall_image)
-    canvas.create_image(240,420,image=banana1)
-    canvas.create_image(290,420,image=banana1)
-    canvas.create_image(440,320,image=banana1)
-    canvas.create_image(490,320,image=banana1)
-    canvas.create_image(540,320,image=banana1)
-    canvas.create_image(700,215,image=banana1)
-    canvas.create_image(750,215,image=banana1)
-    canvas.create_image(350,415,image=fire_image)
-    canvas.create_image(800,215,image=fire_image)
+#________move Up_____________
+    if direction == "up":
+        if row != 0:
+            if grid[row-1][col] == FRUIT:
+                countScore(score + 1)
+                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
+            if grid[row-1][col] == FAST_FOOD:
+                countScore(score - 1)
+                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
-    canvas.create_image(500,350,image=wall_image)
+            
+            if grid[row-1][col] == WIN:
+                countDoor(win + 1)   
 
-    canvas.create_image(700,550,image=wall_image)
-    canvas.create_image(750,250,image=wall_image)
-    canvas.create_image(750,520,image=fire_image)
-    
+            if grid[row-1][col] == FIRE:
+                numberOfLife(life - 1)
+                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    # canvas.create_image(1250,600,image=wall_image)
-    canvas.create_image(900,450,image=wall_image)
-    canvas.create_image(950,415,image=banana1)
-    canvas.create_image(899,415,image=fire_image)
-    canvas.create_image(850,420,image=banana1)
-    
+            
+            if grid[row-1][col] != WALL:
+                grid[row][col] = 0
+                grid[row-1][col] = 1
+                
+# _______________move Down______________
+    if direction == "down":
+        if row != len(grid[0])-1:
+            if grid[row+1][col] == FRUIT:
+                countScore(score + 1)
+                winsound.PlaySound("sound\\getCoin.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
 
-    # canvas.create_image(1000,180,image=rock_imag)
-    canvas.create_image(1070,370,image=wall_image)
-    canvas.create_image(1030,340,image=banana1)
-    canvas.create_image(1110,340,image=fire_image)
+            
+            if grid[row+1][col] == FAST_FOOD:
+                countScore(score - 1)
+                winsound.PlaySound("sound\\eat.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)                
 
-    canvas.create_image(1253,270,image=wall_image)
-    canvas.create_image(1290,220,image=win_flag)
+            
+            if grid[row+1][col] == WINS:
+                countDoor(win + 1)
+
+            if grid[row+1][col] == FIRE:
+                numberOfLife(life - 1)
+                winsound.PlaySound("sound\\bird.wav", winsound.SND_ASYNC | winsound.SND_ASYNC)
+
+            
+            if grid[row+1][col] != WALL:
+                grid[row][col]=0
+                grid[row+1][col] =1
+                
+    arrayToDrawing()
+
+def moveLeft(event):
+    moveMonkey("left")
+
+def moveRight(event):
+    moveMonkey("right")
+
+def moveUp(event):
+    moveMonkey("up")
+
+def moveDown(event):
+    moveMonkey("down")
+
+def positionMonkey(grid):  
+    for r in range(len(grid)):
+        for c in range(len(grid[r])):
+            if grid[r][c] == 10:
+                positionOfMonkey=[r, c]
+    return positionOfMonkey
+
+def moveMonkeyLeft(event):
+    indexOfMonkey=positionMonkey(grid)
+    r=indexOfMonkey[0]
+    c=indexOfMonkey[1]
+    if c != 0:
+        grid[r][c]=0
+        grid[r][c-1]=10
+    canvas.after(50,lambda: moveMonkeyLeft(event))
+    arrayToDrawing()
+
+def moveMonkeyRight(event):
+    indexOfMonkey=positionMonkey(grid)
+    r=indexOfMonkey[0]
+    c=indexOfMonkey[1]
+    if c != 0:
+        grid[r][c]=0
+        grid[r][c+1]=10
+    canvas.after(50,lambda: moveMonkeyRight(event))
+    arrayToDrawing()
 
 
 
@@ -401,77 +537,71 @@ def clickLevel():
     canvas.create_image(150,40,image=back)
     canvas.create_text(150,42,text="Back",font=('BLOODY TYPE PERSONAL USE', 15 ,'bold'), fill='black', tags='bak')
 
-    canvas.create_text(400, 210, text="Easy",tags="level1", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
-    canvas.tag_bind("level1","<Button-1>",levelEasy) 
+    canvas.create_text(400, 210, text="Level1",tags="level1", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
+    canvas.tag_bind("level1","<Button-1>",level1) 
 
-    canvas.create_text(400, 325, text="Medium",tags="level2", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
-    canvas.tag_bind("level2","<Button-1>",levelMedium) 
+    canvas.create_text(400, 325, text="Level2",tags="level2", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
+    canvas.tag_bind("level2","<Button-1>",level2) 
 
-    canvas.create_text(400, 445, text="Hard",tags="level3", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
-    canvas.tag_bind("level3","<Button-1>",levelHard)    
+    canvas.create_text(400, 445, text="Level3",tags="level3", fill='gold', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'))
+    canvas.tag_bind("level3","<Button-1>",level3)    
 
 # _______________Back click________________
 def bakClick(event):
     canvas.delete('all')
     interface()
 canvas.tag_bind('bak','<Button-1>',bakClick)
+
+
+#____________key control__________
+root.bind("<Left>",moveLeft)
+root.bind("<Right>",moveRight)
+root.bind("<Up>",moveUp)
+root.bind("<Down>",moveDown)
+
 # ________________win______________
 def win():
-    canvas.create_rectangle(220,200,1000,500,fill='white')
-    canvas.create_text(600,250,text="You Won!",font=('BLOODY TYPE PERSONAL USE', 40 ,'bold'), fill="black")
+    canvas.create_rectangle(350,200,1050,500,fill='gold')
 
-    canvas.create_image(300,350,image=Score_MK)
-    canvas.create_text(400,350,text='score X ', font='212BabyGirl 25 bold',fill='black')
-    canvas.create_text(480,350,text=score,font='212BabyGirl 30 bold',fill='red')
+    canvas.create_text(720,250,text="You Won!",font=('BLOODY TYPE PERSONAL USE', 50 ,'bold'), fill="black")
 
-    canvas.create_image(700,350,image=heart)
-    canvas.create_text(790,350,text='Heart X ', font='212BabyGirl 25 bold',fill='black')
-    canvas.create_text(860,350,text=life,font='212BabyGirl 30 bold',fill='red')
+    canvas.create_image(450,350,image=Score_MK)
+    canvas.create_text(550,350,text='score X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
+    canvas.create_text(630,350,text=score,font='212BabyGirl 30 bold',fill='red')
 
-    canvas.create_text(900,450,text='Menu',font='212BabyGirl 30',fill='black',tags='ne')
+    canvas.create_image(780,350,image=heart)
+    canvas.create_text(880,350,text='Heart X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
+    canvas.create_text(950,350,text=' 0',font='212BabyGirl 30 bold',fill='red')
+
+    canvas.create_text(930,450,text='Menu',font=('BLOODY TYPE PERSONAL USE', 30 ,'bold'),fill='black',tags='ne')
     win()
 
 # _________lost_______________
 def Lost():
 
-    canvas.create_rectangle(220,200,1000,500,fill='white')
+    canvas.create_rectangle(350,200,1050,500,fill='gold')
 
-    canvas.create_text(600,250,text="You Lost!",font=('BLOODY TYPE PERSONAL USE', 50 ,'bold'), fill="black")
+    canvas.create_text(720,250,text="You Lost!",font=('BLOODY TYPE PERSONAL USE', 50 ,'bold'), fill="black")
 
-    canvas.create_image(300,350,image=Score_MK)
-    canvas.create_text(400,350,text='score X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
-    canvas.create_text(480,350,text=score,font='212BabyGirl 30 bold',fill='red')
+    canvas.create_image(450,350,image=Score_MK)
+    canvas.create_text(550,350,text='score X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
+    canvas.create_text(630,350,text=score,font='212BabyGirl 30 bold',fill='red')
 
-    canvas.create_image(700,350,image=heart)
-    canvas.create_text(790,350,text='Heart X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
-    canvas.create_text(860,350,text=' 0',font='212BabyGirl 30 bold',fill='red')
+    canvas.create_image(780,350,image=heart)
+    canvas.create_text(880,350,text='Heart X ', font=('BLOODY TYPE PERSONAL USE', 25 ,'bold'),fill='black')
+    canvas.create_text(950,350,text=' 0',font='212BabyGirl 30 bold',fill='red')
 
-    canvas.create_text(900,450,text='Menu',font=('BLOODY TYPE PERSONAL USE', 30 ,'bold'),fill='black',tags='ne')
+    canvas.create_text(930,450,text='Menu',font=('BLOODY TYPE PERSONAL USE', 30 ,'bold'),fill='black',tags='ne')
 
     Lost()
-
-# ___________________settime_________________
-time = 50
-def settime():
-    global time
-    canvas.itemconfig(timer,text='Timer : ' + str(time)+ "s")
-
-    if time <= 50:
-        time -= 1
-
-    if time <= 0:
-        Lost()
-        time=50
-    canvas.after(1500,settime)
-
 
 
 # _____________functionn for next level_____________
 def nextLevel(event):
     canvas.delete('all')
-    global score,life,flag,isfound,isWin,time
+    global grid,score,life,win,isfound,isWin,time
     score=0
-    flag=0
+    win=0
     isfound=False
     isWin=True
     time = 0
